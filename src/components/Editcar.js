@@ -6,13 +6,15 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 
-export default function Addcar(props) {
+export default function Editcar(props) {
   const [open, setOpen] = React.useState(false);
   const [car, setCar] = React.useState({
       brand: '', model: '', color: '', fuel: '', year: '', price: ''
   });
 
   const handleClickOpen = () => {
+      setCar({brand: props.car.brand, model: props.car.model, color: props.car.color, 
+        fuel: props.car.fuel, year: props.car.year, price: props.car.price })
     setOpen(true);
   };
 
@@ -24,17 +26,17 @@ export default function Addcar(props) {
     setCar({...car, [event.target.name]: event.target.value})
   };
 
-  const addCar = () => {
-      props.saveCar(car);
+  const updateCar = () => {
+      props.updateCar(car, props.car._links.car.href);
       handleClose();
   };
     return (
         <div>
-        <Button style={{margin: 10}} variant="outlined" color="primary" onClick={handleClickOpen}>
-            Add Car
+        <Button color="primary" onClick={handleClickOpen}>
+            Edit
         </Button>
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">New Car</DialogTitle>
+            <DialogTitle id="form-dialog-title">Edit Car</DialogTitle>
                 <DialogContent>        
                     <TextField
                         autoFocus
@@ -95,7 +97,7 @@ export default function Addcar(props) {
                 <Button onClick={handleClose} color="primary">
                     Cancel
                 </Button>
-                <Button onClick={addCar} color="primary">
+                <Button onClick={updateCar} color="primary">
                     Save
                 </Button>
             </DialogActions>
