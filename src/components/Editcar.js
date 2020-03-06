@@ -5,6 +5,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
 
 export default function Editcar(props) {
   const [open, setOpen] = React.useState(false);
@@ -12,6 +14,7 @@ export default function Editcar(props) {
       brand: '', model: '', color: '', fuel: '', year: '', price: ''
   });
 
+  const [open1, setOpen1] = React.useState(false);
   const handleClickOpen = () => {
       setCar({brand: props.car.brand, model: props.car.model, color: props.car.color, 
         fuel: props.car.fuel, year: props.car.year, price: props.car.price })
@@ -26,9 +29,21 @@ export default function Editcar(props) {
     setCar({...car, [event.target.name]: event.target.value})
   };
 
+  const handleClose1 = (event, reason) => {
+    if(reason === 'clickaway') {
+        return;
+    }
+
+    setOpen1(false);
+};
+
+  const handleClick1 = () => {
+    setOpen1(true);
+};
   const updateCar = () => {
       props.updateCar(car, props.car._links.car.href);
       handleClose();
+      handleClick1();
   };
     return (
         <div>
@@ -102,6 +117,25 @@ export default function Editcar(props) {
                 </Button>
             </DialogActions>
         </Dialog>
+        <Snackbar
+                anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+                }}
+                open={open1}
+                autoHideDuration={900000}
+                onClose={handleClose1}
+                message="The car was edited"
+                action={
+        <React.Fragment>
+        <Button color="secondary" size="small" onClick={handleClose1}>
+              Close
+        </Button>
+        <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose1}>              
+        </IconButton>
+        </React.Fragment>
+        }
+        />
     </div>
     );
 }

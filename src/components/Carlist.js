@@ -85,10 +85,6 @@ const columns = [
         accessor: 'fuel'
     },
     {
-        Header: 'Model',
-        accessor: 'model'
-    },
-    {
         Header: 'Year',
         accessor: 'year'
     },
