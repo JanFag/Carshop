@@ -64,7 +64,7 @@ const updateCar = (car, link) => {
     }) 
     .then(res => fetchData())
     .catch(err => console.error(err))
-
+    
 };
 
 const columns = [

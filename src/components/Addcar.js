@@ -11,7 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 export default function Addcar(props) {
   const [open, setOpen] = React.useState(false);
   const [car, setCar] = React.useState({
-      brand: '', model: '', color: '', fuel: '', year: '', price: ''
+    activity: '', date: '', duration: '',  customer: ''
   });
 
   const [open1, setOpen1] = React.useState(false);
@@ -42,8 +42,8 @@ export default function Addcar(props) {
   const handleClick1 = () => {
     setOpen1(true);
 };
-  const addCar = () => {
-      props.saveCar(car);
+  const addTraining = () => {
+      props.saveTraining(saveTraining);
       handleClose();
       handleClick1();
   };
@@ -53,68 +53,54 @@ export default function Addcar(props) {
             Add Car
         </Button>
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">New Car</DialogTitle>
-                <DialogContent>        
-                    <TextField
+            <DialogTitle id="form-dialog-title">New TrainingDialogTitle>
+                <DialogContent> 
+                     <TextField
                         autoFocus
                         margin="dense"
-                        name="brand"
-                        value={car.brand}
+                        name="activity"
+                        value={training.activity}
                         onChange={e => handleInputCnange(e)}
-                        label="Brand"                        
+                        label="Activity"                        
+                        fullWidth
+                    />       
+                    <TextField
+                        
+                        margin="dense"
+                        name="date"
+                        type="date"
+                        value={training.date}
+                        onChange={e => handleInputCnange(e)}
+                        label="Date"                        
+                        fullWidth
+                    />
+                     
+                     <TextField
+                        
+                        margin="dense"
+                        name="duration"
+                        type="numeric"
+                        value={training.duration}
+                        onChange={e => handleInputCnange(e)}
+                        label="Duration in minutes"                        
                         fullWidth
                     />
                      <TextField
                         
                         margin="dense"
-                        name="model"
-                        value={car.model}
-                        onChange={e => handleInputCnange(e)}
-                        label="Model"                        
+                        name="customer"                        
+                        defaultValue={customer.name}
+                        value={training.customer}                        
+                        label="Customer"                        
                         fullWidth
                     />
-                     <TextField
-                        
-                        margin="dense"
-                        name="color"
-                        value={car.color}
-                        onChange={e => handleInputCnange(e)}
-                        label="Color"                        
-                        fullWidth
-                    />
-                     <TextField
-                        
-                        margin="dense"
-                        name="fuel"
-                        value={car.fuel}
-                        onChange={e => handleInputCnange(e)}
-                        label="Fuel"                        
-                        fullWidth
-                    />
-                     <TextField
-                        
-                        margin="dense"
-                        name="year"
-                        value={car.year}
-                        onChange={e => handleInputCnange(e)}
-                        label="Year"                        
-                        fullWidth
-                    />
-                     <TextField
-                        
-                        margin="dense"
-                        name="price"
-                        value={car.price}
-                        onChange={e => handleInputCnange(e)}
-                        label="Price"                        
-                        fullWidth
-                    />
+                     
                 </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose} color="primary">
                     Cancel
                 </Button>
-                <Button onClick={addCar} color="primary">
+                <Button onClick={addTraining} color="primary">
                     Save
                 </Button>
             </DialogActions>
@@ -127,7 +113,7 @@ export default function Addcar(props) {
                 open={open1}
                 autoHideDuration={6000}
                 onClose={handleClose1}
-                message="The car was added"
+                message="The training was added"
                 action={
                     <React.Fragment>
                     <Button color="secondary" size="small" onClick={handleClose1}>
